@@ -1,14 +1,7 @@
 from PIL import Image
-# import pytesseract
+
 import random
 
-# 
-
-def get_concat_h_cut(im1, im2):
-    dst = Image.new('RGB', (im1.width + im2.width, min(im1.height, im2.height)))
-    dst.paste(im1, (0, 0))
-    dst.paste(im2, (im1.width, 0))
-    return dst
 
 dic = {
     '_':['F:\\Projects\\Handwriting\\Data\\_\\_.PNG'],
@@ -65,7 +58,7 @@ dic = {
     'y':['F:\\Projects\\Handwriting\\Data\\small\\y\\3y.PNG','F:\\Projects\\Handwriting\\Data\\small\\y\\2y.PNG'],
     'z':['F:\\Projects\\Handwriting\\Data\\small\\z\\3z.PNG','F:\\Projects\\Handwriting\\Data\\small\\z\\2z.PNG'],
 }
-# Cap = 'abcdefghikjlmnopqrstuvwxyz'
+
 with open('sample.txt','r') as file:
     l = file.read()
     image = Image.new('RGB',(500,500),color=(224,224,224))
@@ -78,13 +71,9 @@ with open('sample.txt','r') as file:
             continue
         if v==' ':
             v='_'
-        # print(v,end='')
         im = Image.open(random.choice(dic[v]))
         image1 = Image.new('RGB',(im.size[0],32),color=(224,224,224))
-        # print(im.size)
         image1.paste(im,(0,32-im.size[1]))
-        
-    # #     # break
         image.paste(image1,(c,h))
         c+=im.size[0]
     image.save('output.png')
